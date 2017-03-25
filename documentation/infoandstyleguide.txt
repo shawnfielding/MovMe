@@ -1,6 +1,28 @@
 This is our Standards document and reference
 
 ------------------------------- Important Information -----------------------------
+themoviedb.org 
+apikey: 9e47aea3d7ab855ced2fcc031863b928
+	
+apireadaccesstoken: 
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZTQ3YWVhM2Q3YWI4NTVjZWQyZmNjMDMxODYzYjkyOCIsInN1YiI6IjU4ZDYwNjgxOTI1MTQxMWZhYTAzODVjMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PTBVAKtYYk-1I-jhx1RzX7MN7Ue9emEBA2ilDTRfjjE
+
+Sample api requisition:
+https://api.themoviedb.org/3/movie/550?api_key=9e47aea3d7ab855ced2fcc031863b928
+
+
+https://api.themoviedb.org/3/movie/550?api_key=9e47aea3d7ab855ced2fcc031863b928
+
+
+
+
+https://indico.io/dashboard/
+apikey: 61cb69fcfa24357a37c920ee85cc3374
+
+ 
+
+
+
 ------------------------ global variables -    -----------------------
 
 
