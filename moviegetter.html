@@ -5,39 +5,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Moviegetter</title>
-
-
     <!--- jQuery  -------------------------------------------------->
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
     </script>
-
   </head>
-
   <body>
-
     <div id="theResults"></div>
-    <JavaScript Link and Code ------------------------------------------>
-      <!-- <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script> -->
+
       <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+          <!-- JavaScript Link and Code ------------------------------------------>
       <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCuLJPX2_o3RXXOcRqy_5XTtC0RcdNU2R8",
-        authDomain: "testingimportere.firebaseapp.com",
-        databaseURL: "https://testingimportere.firebaseio.com",
-        storageBucket: "testingimportere.appspot.com",
-        messagingSenderId: "883800776726"
-      };
-      firebase.initializeApp(config);
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyB3cKe_KGVOsgTIkr6lSiszMiczU0PNYSM",
+          authDomain: "movme-92cb7.firebaseapp.com",
+          databaseURL: "https://movme-92cb7.firebaseio.com",
+          projectId: "movme-92cb7",
+          storageBucket: "movme-92cb7.appspot.com",
+          messagingSenderId: "314238857658"
+        };
+        firebase.initializeApp(config);
       </script>
       <script>
-
       var database = firebase.database();
       $(document).ready(function() {
-
+// ------- Objects for importing ------
         var genre = {
           genreId: 0,
           genreName: ""
@@ -51,11 +45,14 @@
           movieImage: "",
         }
 
-
+// --------- Handy variables ------
         var theMovies = [];
 
-        //loops through the genres and gets 40 movies, waits 15 seconds and gets the next one.  It prints them out in csv format on this page in a div above.
+// ----------- Functions ------
 
+// -------- This function takes an array of ids and gets the movies associated
+// -------- It then pushes them into the database.
+// ------- Currently it only gets the first page of each genre, but it can easily be expanded.
         function getMoviesfromArrayIDs(genreids) {
           var pageArray = [];
           // turn genreids values into an array]
@@ -87,11 +84,12 @@
                 console.log(theMovies)
               })
             }, i * 3000);
-            $("#theResults").text(theMovies)
           })
         }
 
-        // gets the genres in JSON and parse out the Genre ids
+// --------- This function queries the movie site and gets all possible genres and their id's
+// --------- It loops through them and puts them into our database.
+// --------- It then makes an array of them and sends it to the function that gets the movies associated.
         function getObjectGenresIdsWithAjax() {
           console.log("got to the first function")
           var settings = {
@@ -119,12 +117,10 @@
             }
           getMoviesfromArrayIDs(theArrayGenreIds)
         })
-
-      }        getObjectGenresIdsWithAjax();
-
+      }
+// --------  This starts everything.
+      getObjectGenresIdsWithAjax();
     })
       </script>
-
   </body>
-
 </html>
