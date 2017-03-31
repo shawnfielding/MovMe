@@ -36,19 +36,38 @@
           genreId: 0,
           genreName: ""
         };
-
-        var theMovie = {
-          movieId : 0,
-          movieName: "",
-          movieDescription: "",
-          movieGenres: [],
-          movieImage: "",
-        }
+        var movies = []
+        // var theMovie = {
+        //   movieId : 0,
+        //   movieName: "",
+        //   movieDescription: "",
+        //   movieGenres: [],
+        //   movieImage: "",
+        //   movieEs: []
+        // }
 
 // --------- Handy variables ------
         var theMovies = [];
 
 // ----------- Functions ------
+
+// ----------- This function get the ES for each movie
+function getES(desc){
+  var emotionScore;
+  $.post(
+  	'https://apiv2.indico.io/emotion',
+  	JSON.stringify({
+  		'api_key': "61cb69fcfa24357a37c920ee85cc3374",
+  		'data': desc,
+  	})
+  ).then(function(res) {
+  	emotionScore = JSON.stringify(res);
+    console.log(emotionScore);
+    console.log(typeof emotionScore)
+    return emotionScore;
+  });
+
+}
 
 // -------- This function takes an array of ids and gets the movies associated
 // -------- It then pushes them into the database.
@@ -70,20 +89,23 @@
               }
               $.ajax(settings).done(function(response) {
                 var theResults = response.results
+                var movieId;
+                var movieName;
+                var movieDescription;
+                var movieGenres;
+                var movieImage;
+                var movieEs;
                 $.each(theResults, function(k) {
-                  theMovie.movieId = theResults[k].id;
-                  theMovie.movieName = theResults[k].original_title;
-                  theMovie.movieDescription = theResults[k].overview;
-                  theMovie.movieGenres = theResults[k].genre_ids;
-                  theMovie.movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
-                    database.ref('movies').push({theMovie});
-                  //
+                  movieId = theResults[k].id;
+                  movieName = theResults[k].original_title;
+                  movieDescription = theResults[k].overview;
+                  movieGenres = theResults[k].genre_ids;
+                  movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
+                  console.log(getES(movieDescription));  // Why is this not returning a string?
+                  database.ref('movies').child(movieId).set({ "Title": movieName, "Description": movieDescription, "Genre": movieGenres, "Poster": movieImage, "EmoSig": movieEs });
                 })
-                theMovies.push(JSON.stringify(response));
-                console.log(JSON.stringify(response))
-                console.log(theMovies)
               })
-            }, i * 3000);
+            }, i * 1000);
           })
         }
 
@@ -101,21 +123,23 @@
             "data": "{}"
           }
           $.ajax(settings).done(function(response) {
-            var genreObjectArray = response.genres;
-            console.log(JSON.stringify(genreObjectArray));
-            console.log(typeof genreObjectArray);
-            console.log(genreObjectArray.length);
+            console.log(response);
+            var genres = response.genres;
+            console.log(JSON.stringify(genres));
+            console.log(typeof genres);
+            console.log(genres.length);
+            database.ref().push({genres})
             // this part pushes the genres to the database
-            $.each(genreObjectArray, function(x) {
-              genre.genreId = genreObjectArray[x].id;
-              genre.genreName = genreObjectArray[x].name;
-              database.ref('genres').push({genre});
-            });
+            // $.each(genres, function(x) {
+            //   genre.genreId = genres[x].id;
+            //   genre.genreName = genres[x].name;
+            //   database.ref('genres').push({genre});
+            // });
             var theArrayGenreIds = [];
-            for (var i = 0; i < genreObjectArray.length; i++) {
-              theArrayGenreIds.push(genreObjectArray[i]["id"]); // I should now have the genre Ids alone in an array.
+            for (var i = 0; i < genres.length; i++) {
+              theArrayGenreIds.push(genres[i]["id"]); // I should now have the genre Ids alone in an array.
             }
-          getMoviesfromArrayIDs(theArrayGenreIds)
+         getMoviesfromArrayIDs(theArrayGenreIds)
         })
       }
 // --------  This starts everything.
