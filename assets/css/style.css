@@ -1,120 +1,150 @@
-/*-------------
- 	General styles for elements and such
--------------*/
-
-*{
-}
-
-html  {
-
+html {
+	background-color: #666;	
 }
 
 body {
-background-image: url("../images/2266.jpg");
-background-color: #eee;
-background-repeat: no-repeat;
-}
+	background-color: #666;
+	background-image: url("../images/movme.png");
+	background-repeat: no-repeat;
 
-div {
-}
-
-.container {
-
-}
-
-.row {
-
-}
-
-/*Because we are using bootstrap, the definition of the general column name does not exist.*/
-
-h1,h2,h3,h4,h5 {
-}
-
-h1 {
-}
-
-h2 {
-	text-align: center;
-    font-family: serif;
-    font-size: 25px;
-    margin-top: 10px;
-    color: #000;
-    margin-bottom: 10px;
-}
-
-h3 {
-}
-
-h4 {
-}
-
-h5 {
-}
-
-#header {
-/*	background-image: url("../images/256.jpg");*/
-	height: 250px;
-    background-color: #fff;
-
-}
-#header-two {
-    background-color: #fff;
-    background-position: 100% auto;
-    height: 550px;
-
-}
-
-.icon {
-	width: 40px;
-	height: 40px;
-	float: right;
-	position: 550px;
-	padding: 5px;	
-	margin-top: 5px;
-}
-
-#banner {
-	width: 100%;
-	height: 250px;
 	
 }
-.navbar-default .navbar-brand {
-	color: #000;
+#navigation {
+	width: 400px;
 	height: 50px;
-    font-size: 23px;
+	margin: 0 auto;
+	list-style: none;
+	padding-top: 20px;
 	
 }
 
-.navbar-default {
-    background-color: #fff;
-    border-color: #e7e7e7;
+li {
+	display: inline-block;
+	text-align: center;
+	color: #fff;
+	font-size: larger;
+	
+}
+
+#main {
+	width: 820px;
+	height: 900px;
+	background-color: #fff;
+	margin: 0 auto;
+	margin-top: 10px;
+	border-radius: 5px;
+	border-top: 10px solid #C33;
+	border-bottom: 10px solid #C33;
+}
+
+
+
+#content {
+	position: absolute;
+	top: 90px;	
+	padding: 10px;
+	width: 820px;
+	
+}
+
+#logo {
+	color: #fff;
+	font-weight: bold;
+	font-size: xx-large;
+	
+	
+}
+
+.img-one {
+	width: 300px;
+	height: 200px;
+	margin-right: 10px;
+		
+}
+
+.img-two {
+	width: 200px;
+	height: 150px;
+	margin-right: 10px;
+		
+}
+
+#img-left {
+	float: left;
+	
+}
+
+#img-right {
+	float: right;	
+}
+
+hr.red {
+	border-top: 1px solid #c33;	
 }
 
 #input-style {
-	width: 300px;
-	overflow: auto;
-	margin-bottom: 40px;
-
+	width: 200px;
 }
 
-#font-one {
-	font-family: 'Philosopher', sans-serif;
-}
-
-#input-radio {
+.spacing {
 	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#button-bg {
+	background-color: #ccc;
+	border: 1px solid #fff;
+	color: #000;
 
 }
-/*-------------------
-Section-specific styles
----------------------*/
+
+h3 {
+	font-size: larger;
+
+}
+
+#movie-selection {
+	width: 820px;
+
+}
 
 
+@media only screen and (max-width: 768px) {
+	body {
+		background-image: none;
 
+	}
 
+	#main {
+		width: 620px;
+	}
 
+	#content {
+		width: 620px;
+	}
 
-/*---------------------------
-Device-specific customizations
-------------------------------*/
+	#img-right {
+		float: left;
+	}
+
+}
+
+@media only screen and (max-width: 480px) {
+	body {
+		background-image: none;
+
+	}
+
+	#main {
+		width: 400px;
+	}
+
+	#content {
+		width: 400px;
+	}
+
+	#img-right {
+		float: left;
+	}
+
+}
