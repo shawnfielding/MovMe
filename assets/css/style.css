@@ -1,60 +1,153 @@
 /*-------------
  	General styles for elements and such
 -------------*/
-
-*{
-}
-
-html  {
-	
+html {
+	background-color: #666;	
 }
 
 body {
+	background-color: #666;
+	background-image: url("../images/movme.png");
+	background-repeat: no-repeat;
 
+	
+}
+#navigation {
+	width: 400px;
+	height: 50px;
+	margin: 0 auto;
+	list-style: none;
+	padding-top: 20px;
+	
 }
 
-div {
+li {
+	display: inline-block;
+	text-align: center;
+	color: #fff;
+	font-size: larger;
+	
 }
 
-.container {
-
+#main {
+	width: 820px;
+	height: 900px;
+	background-color: #fff;
+	margin: 0 auto;
+	margin-top: 10px;
+	border-radius: 5px;
+	border-top: 10px solid #C33;
+	border-bottom: 10px solid #C33;
 }
 
-.row {
 
+
+#content {
+	position: absolute;
+	top: 90px;	
+	padding: 10px;
+	width: 820px;
+	
 }
 
-/*Because we are using bootstrap, the definition of the general column name does not exist.*/
-
-h1,h2,h3,h4,h5 {
+#logo {
+	color: #fff;
+	font-weight: bold;
+	font-size: xx-large;
+	
+	
 }
 
-h1 {
+.img-one {
+	width: 300px;
+	height: 200px;
+	margin-right: 10px;
+		
 }
 
-h2 {
-		text-align: center;
+.img-two {
+	width: 200px;
+	height: 150px;
+	margin-right: 10px;
+		
+}
+
+#img-left {
+	float: left;
+	
+}
+
+#img-right {
+	float: right;	
+}
+
+hr.red {
+	border-top: 1px solid #c33;	
+}
+
+#input-style {
+	width: 200px;
+}
+
+.spacing {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#button-bg {
+	background-color: #ccc;
+	border: 1px solid #fff;
+	color: #000;
+
 }
 
 h3 {
+	font-size: larger;
+
 }
 
-h4 {
+#movie-selection {
+	width: 820px;
+
 }
 
-h5 {
+
+@media only screen and (max-width: 768px) {
+	body {
+		background-image: none;
+
+	}
+
+	#main {
+		width: 620px;
+	}
+
+	#content {
+		width: 620px;
+	}
+
+	#img-right {
+		float: left;
+	}
+
 }
 
+@media only screen and (max-width: 480px) {
+	body {
+		background-image: none;
 
-/*-------------------
-Section-specific styles
----------------------*/
+	}
 
+	#main {
+		width: 400px;
+	}
 
+	#content {
+		width: 400px;
+	}
 
+	#img-right {
+		float: left;
+	}
 
-
-
-/*---------------------------
-Device-specific customizations
-------------------------------*/
+}
