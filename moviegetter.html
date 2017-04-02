@@ -53,16 +53,20 @@ function getMoviesFromID (theGenreID){
 }
 
 
-  function getMoviesfromArrayIDs(genreids){
+  function getMoviesfromArrayIDs (genreids){
   var theId;
-    for(var i = 0; i < genreids.length; i++){
-      theId  = genreids[i] ;
+ 
       setTimeout( function(){
       // console.log("hi");
-      }, 3000);
+      for(var i = 0; i < genreids.length; i++){
+      theId  = genreids[i];
+
       console.log("hello");
+      }      
+      }, 3000);
+
     }
-  }
+  })
 
     //   async: true,
     //   crossDomain: true,
@@ -102,11 +106,11 @@ function getObjectGenresIdsWithAjax(){
     for(var i = 0; i < genreObjectArray.length; i++ ){
       theArrayGenreIds.push(genreObjectArray[i]["id"]); // I should now have the genre Ids alone in an array.
     }
-    getMoviesfromArrayIDs(theArrayGenreIds)
+    getMoviesfromArrayIDs(theArrayGenreIds);
   })
 }
   getObjectGenresIdsWithAjax();
-  })
+
   </script>
 
 </body>
