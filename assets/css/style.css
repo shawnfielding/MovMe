@@ -7,14 +7,11 @@ body {
 	background-image: url("../images/movme2.png");
 	background-repeat: no-repeat;
 	background-position: right;
-
+	
 	
 }
+
 #navigation {
-/*	width: 400px;
-	height: 50px;
-	margin: 0 auto;
-	list-style: none;*/
 	padding-top: 20px;
 	
 }
@@ -96,6 +93,13 @@ a:hover {
 		
 }
 
+.img-three {
+	width: 400px;
+	height: 200px;
+	margin-right: 10px;
+
+}
+
 #img-left {
 	float: left;
 	
@@ -130,6 +134,10 @@ h3 {
 
 }
 
+h2 {
+	font-size: 2em;
+
+}
 #movie-selection {
 	width: 820px;
 
@@ -145,17 +153,47 @@ h3 {
 
 	#main {
 		width: 620px;
+
 	}
 
 	#content {
 		width: 620px;
+		top: 70px;
 	}
 
 	#img-right {
 		float: left;
 	}
 
-}
+	ul {
+		list-style-type: none;
+	    margin: 0 auto;
+	    overflow: hidden;
+	    width: 400px;
+	    height: 30px;
+	    position: absolute;
+	}
+
+	li {
+		display: inline-block;
+		float: left;
+		color: #fff;
+		font-size: larger;
+		
+	}
+
+	li a {
+	display: block;
+	}
+
+	#navigation {
+	padding-bottom: 30px;
+	width: 400px;
+	height: 50px;
+	margin: 0 auto;
+	list-style: none;
+	}
+
 
 @media only screen and (max-width: 480px) {
 	body {
@@ -177,6 +215,10 @@ h3 {
 
 	#main {
 		height: 1200px ;
+	}
+
+	ul {
+		width: 15%;
 	}
 
 }
