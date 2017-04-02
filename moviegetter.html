@@ -12,7 +12,7 @@
     </script>
   </head>
   <body>
-    <div id="theResults"></div>
+    <div id="theResults">hello</div>
 
       <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
           <!-- JavaScript Link and Code ------------------------------------------>
@@ -37,15 +37,14 @@
           genreName: ""
         };
         var movies = []
-        // var theMovie = {
-        //   movieId : 0,
-        //   movieName: "",
-        //   movieDescription: "",
-        //   movieGenres: [],
-        //   movieImage: "",
-        //   movieEs: []
-        // }
-
+        var theMovie = {
+          movieId : 0,
+          movieName: "",
+          movieDescription: "",
+          movieGenres: [],
+          movieImage: "",
+        }
+        $ArrayOfMovies= []
 // --------- Handy variables ------
         var theMovies = [];
 
@@ -62,9 +61,10 @@ function getES(desc){
   	})
   ).then(function(res) {
   	emotionScore = JSON.stringify(res);
-    console.log(emotionScore);
-    console.log(typeof emotionScore)
-    return emotionScore;
+
+    console.log(res);
+    console.log(typeof res)
+    movieEs = emotionScore;
   });
 
 }
@@ -94,26 +94,27 @@ function getES(desc){
                 var movieDescription;
                 var movieGenres;
                 var movieImage;
-                var movieEs;
+                // var movieEs;
                 $.each(theResults, function(k) {
+                  console.log(theResults.length)
+                  console.log(k)
                   movieId = theResults[k].id;
                   movieName = theResults[k].original_title;
                   movieDescription = theResults[k].overview;
                   movieGenres = theResults[k].genre_ids;
                   movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
-                  console.log(getES(movieDescription));  // Why is this not returning a string?
-                  database.ref('movies').child(movieId).set({ "Title": movieName, "Description": movieDescription, "Genre": movieGenres, "Poster": movieImage, "EmoSig": movieEs });
+                  database.ref("Movies").child(movieId).set({ "Title": movieName, "Description": movieDescription, "Genre": movieGenres, "Poster": movieImage});
                 })
               })
             }, i * 1000);
           })
+
         }
 
 // --------- This function queries the movie site and gets all possible genres and their id's
 // --------- It loops through them and puts them into our database.
 // --------- It then makes an array of them and sends it to the function that gets the movies associated.
         function getObjectGenresIdsWithAjax() {
-          console.log("got to the first function")
           var settings = {
             "async": true,
             "crossDomain": true,
@@ -123,12 +124,8 @@ function getES(desc){
             "data": "{}"
           }
           $.ajax(settings).done(function(response) {
-            console.log(response);
             var genres = response.genres;
-            console.log(JSON.stringify(genres));
-            console.log(typeof genres);
-            console.log(genres.length);
-            database.ref().push({genres})
+            database.ref().set({genres})
             // this part pushes the genres to the database
             // $.each(genres, function(x) {
             //   genre.genreId = genres[x].id;
@@ -143,7 +140,18 @@ function getES(desc){
         })
       }
 // --------  This starts everything.
-      getObjectGenresIdsWithAjax();
+    //  getObjectGenresIdsWithAjax();
+
+    database.ref().on('value', function emotionSignature(snapshot){
+      var localMovies = snapshot.val().Movies;
+
+      for(var property in localMovies) {
+        console.log(localMovies[property].Description)
+      }
+
+      // console.log("Value: " + JSON.stringify(snapshot));
+    });
+    //emotionSignature();
     })
       </script>
   </body>
