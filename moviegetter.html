@@ -12,7 +12,7 @@
     </script>
   </head>
   <body>
-    <div id="theResults">hello</div>
+    <div id="theResults"></div>
 
       <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
           <!-- JavaScript Link and Code ------------------------------------------>
@@ -36,7 +36,7 @@
           genreId: 0,
           genreName: ""
         };
-        var movies = []
+
         var theMovie = {
           movieId : 0,
           movieName: "",
@@ -44,30 +44,11 @@
           movieGenres: [],
           movieImage: "",
         }
-        $ArrayOfMovies= []
+
 // --------- Handy variables ------
         var theMovies = [];
 
 // ----------- Functions ------
-
-// ----------- This function get the ES for each movie
-function getES(desc){
-  var emotionScore;
-  $.post(
-  	'https://apiv2.indico.io/emotion',
-  	JSON.stringify({
-  		'api_key': "61cb69fcfa24357a37c920ee85cc3374",
-  		'data': desc,
-  	})
-  ).then(function(res) {
-  	emotionScore = JSON.stringify(res);
-
-    console.log(res);
-    console.log(typeof res)
-    movieEs = emotionScore;
-  });
-
-}
 
 // -------- This function takes an array of ids and gets the movies associated
 // -------- It then pushes them into the database.
@@ -89,32 +70,28 @@ function getES(desc){
               }
               $.ajax(settings).done(function(response) {
                 var theResults = response.results
-                var movieId;
-                var movieName;
-                var movieDescription;
-                var movieGenres;
-                var movieImage;
-                // var movieEs;
                 $.each(theResults, function(k) {
-                  console.log(theResults.length)
-                  console.log(k)
-                  movieId = theResults[k].id;
-                  movieName = theResults[k].original_title;
-                  movieDescription = theResults[k].overview;
-                  movieGenres = theResults[k].genre_ids;
-                  movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
-                  database.ref("Movies").child(movieId).set({ "Title": movieName, "Description": movieDescription, "Genre": movieGenres, "Poster": movieImage});
+                  theMovie.movieId = theResults[k].id;
+                  theMovie.movieName = theResults[k].original_title;
+                  theMovie.movieDescription = theResults[k].overview;
+                  theMovie.movieGenres = theResults[k].genre_ids;
+                  theMovie.movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
+                    database.ref('movies').push({theMovie});
+                  //
                 })
+                theMovies.push(JSON.stringify(response));
+                console.log(JSON.stringify(response))
+                console.log(theMovies)
               })
-            }, i * 1000);
+            }, i * 3000);
           })
-
         }
 
 // --------- This function queries the movie site and gets all possible genres and their id's
 // --------- It loops through them and puts them into our database.
 // --------- It then makes an array of them and sends it to the function that gets the movies associated.
         function getObjectGenresIdsWithAjax() {
+          console.log("got to the first function")
           var settings = {
             "async": true,
             "crossDomain": true,
@@ -124,34 +101,25 @@ function getES(desc){
             "data": "{}"
           }
           $.ajax(settings).done(function(response) {
-            var genres = response.genres;
-            database.ref().set({genres})
+            var genreObjectArray = response.genres;
+            console.log(JSON.stringify(genreObjectArray));
+            console.log(typeof genreObjectArray);
+            console.log(genreObjectArray.length);
             // this part pushes the genres to the database
-            // $.each(genres, function(x) {
-            //   genre.genreId = genres[x].id;
-            //   genre.genreName = genres[x].name;
-            //   database.ref('genres').push({genre});
-            // });
+            $.each(genreObjectArray, function(x) {
+              genre.genreId = genreObjectArray[x].id;
+              genre.genreName = genreObjectArray[x].name;
+              database.ref('genres').push({genre});
+            });
             var theArrayGenreIds = [];
-            for (var i = 0; i < genres.length; i++) {
-              theArrayGenreIds.push(genres[i]["id"]); // I should now have the genre Ids alone in an array.
+            for (var i = 0; i < genreObjectArray.length; i++) {
+              theArrayGenreIds.push(genreObjectArray[i]["id"]); // I should now have the genre Ids alone in an array.
             }
-         getMoviesfromArrayIDs(theArrayGenreIds)
+          getMoviesfromArrayIDs(theArrayGenreIds)
         })
       }
 // --------  This starts everything.
-    //  getObjectGenresIdsWithAjax();
-
-    database.ref().on('value', function emotionSignature(snapshot){
-      var localMovies = snapshot.val().Movies;
-
-      for(var property in localMovies) {
-        console.log(localMovies[property].Description)
-      }
-
-      // console.log("Value: " + JSON.stringify(snapshot));
-    });
-    //emotionSignature();
+      getObjectGenresIdsWithAjax();
     })
       </script>
   </body>
