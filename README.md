@@ -17,6 +17,8 @@ Are you ready to be moved?
 * JavaScript
 * jQuery
 * node.js
+* Firebase
+* BootStrap
 
 # Getting Started 
 
