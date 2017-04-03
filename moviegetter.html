@@ -1,113 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<!--
-This is a single page script to basically pull a first round of movies, but hopefully will be built to build a csv and individual objects on textpages that can be consumed when we have firebase in play
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moviegetter</title>
+    <!--- jQuery  -------------------------------------------------->
 
-Notes:
-they only allow requests of 40 every 10 seconds.
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+    </script>
+  </head>
+  <body>
+    <div id="theResults">hello</div>
 
-  -->
+      <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+          <!-- JavaScript Link and Code ------------------------------------------>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyB3cKe_KGVOsgTIkr6lSiszMiczU0PNYSM",
+          authDomain: "movme-92cb7.firebaseapp.com",
+          databaseURL: "https://movme-92cb7.firebaseio.com",
+          projectId: "movme-92cb7",
+          storageBucket: "movme-92cb7.appspot.com",
+          messagingSenderId: "314238857658"
+        };
+        firebase.initializeApp(config);
+      </script>
+      <script>
+      var database = firebase.database();
+      $(document).ready(function() {
+// ------- Objects for importing ------
+        var genre = {
+          genreId: 0,
+          genreName: ""
+        };
+        var movies = []
+        var theMovie = {
+          movieId : 0,
+          movieName: "",
+          movieDescription: "",
+          movieGenres: [],
+          movieImage: "",
+        }
+        $ArrayOfMovies= []
+// --------- Handy variables ------
+        var theMovies = [];
 
-  <title>Moviegetter</title>
+// ----------- Functions ------
 
-<!----------------------------------------------- jQuery  -------------------------------------------------->
+// ----------- This function get the ES for each movie
+function getES(desc){
+  var emotionScore;
+  $.post(
+  	'https://apiv2.indico.io/emotion',
+  	JSON.stringify({
+  		'api_key': "61cb69fcfa24357a37c920ee85cc3374",
+  		'data': desc,
+  	})
+  ).then(function(res) {
+  	emotionScore = JSON.stringify(res);
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
-</script>
-
-<!-----------------------------------------------Bootstrap javascript ---------------------------------->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-<!-- --------------------------------------------- Stylesheets ----------------------------------------->
-    <!-- Bootstrap css -->
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Local css -->
-<link href="assets/css/reset.css" rel="stylesheet" type="text/css">
-<link href="assets/css/style.css" rel="stylesheet" type="text/css">
-
-</head>
-
-<body>
-
-<div id="theResults"></div>
-
-
-<!------------------------------------- Local JavaScript Link and Code ------------------------------------------>
-  <script>
-  $(document).ready(function() {
-  //loops through the genres and gets 40 movies, waits 15 seconds and gets the next one.  It prints them out in csv format on this page in a div above.
-
-
-function getMoviesFromID (theGenreID){
-  console.log(theGenreID)
-  console.log(typeof theGenreID)
-
+    console.log(res);
+    console.log(typeof res)
+    movieEs = emotionScore;
+  });
 
 }
 
-
-  function getMoviesfromArrayIDs(genreids){
-  var theId;
-    for(var i = 0; i < genreids.length; i++){
-      theId  = genreids[i] ;
-      setTimeout( function(){
-      // console.log("hi");
-      }, 3000);
-      console.log("hello");
-    }
-  }
-
-    //   async: true,
-    //   crossDomain: true,
-    //   url: "https://api.themoviedb.org/3/genre/"+k+"/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
-    //   method: "GET",
-    //   headers: {},
-    //   data: "{}"
-    //   }).done(function (response) {
-    //     $.each(response.data.movies,function(){
-    //       $("#theResponse").append("<p>"+")
-    //     }
-  // }},2000)
-
-  function GetObjectMoviesUsingGenres(){
-    var theGenre = thegenres.genres;
-      for(var i = 0; i < theGenre.length; i++ ){
-        theGenreGet(theGenre);
-        console.log("theGenre.length +")
-        console.log("I +++++++++++++++++++++++++++++");
+// -------- This function takes an array of ids and gets the movies associated
+// -------- It then pushes them into the database.
+// ------- Currently it only gets the first page of each genre, but it can easily be expanded.
+        function getMoviesfromArrayIDs(genreids) {
+          var pageArray = [];
+          // turn genreids values into an array]
+          $.each(genreids, function(i) {
+            setTimeout(function() {
+              console.log(typeof genreids[i])
+              console.log(genreids[i])
+              var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://api.themoviedb.org/3/genre/ " + genreids[i] + "+/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
+                "method": "GET",
+                "headers": {},
+                "data": "{}"
+              }
+              $.ajax(settings).done(function(response) {
+                var theResults = response.results
+                var movieId;
+                var movieName;
+                var movieDescription;
+                var movieGenres;
+                var movieImage;
+                // var movieEs;
+                $.each(theResults, function(k) {
+                  console.log(theResults.length)
+                  console.log(k)
+                  movieId = theResults[k].id;
+                  movieName = theResults[k].original_title;
+                  movieDescription = theResults[k].overview;
+                  movieGenres = theResults[k].genre_ids;
+                  movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
+                  database.ref("Movies").child(movieId).set({ "Title": movieName, "Description": movieDescription, "Genre": movieGenres, "Poster": movieImage});
+                })
+              })
+            }, i * 1000);
+          })
 
         }
+
+// --------- This function queries the movie site and gets all possible genres and their id's
+// --------- It loops through them and puts them into our database.
+// --------- It then makes an array of them and sends it to the function that gets the movies associated.
+        function getObjectGenresIdsWithAjax() {
+          var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
+            "method": "GET",
+            "headers": {},
+            "data": "{}"
+          }
+          $.ajax(settings).done(function(response) {
+            var genres = response.genres;
+            database.ref().set({genres})
+            // this part pushes the genres to the database
+            // $.each(genres, function(x) {
+            //   genre.genreId = genres[x].id;
+            //   genre.genreName = genres[x].name;
+            //   database.ref('genres').push({genre});
+            // });
+            var theArrayGenreIds = [];
+            for (var i = 0; i < genres.length; i++) {
+              theArrayGenreIds.push(genres[i]["id"]); // I should now have the genre Ids alone in an array.
+            }
+         getMoviesfromArrayIDs(theArrayGenreIds)
+        })
+      }
+// --------  This starts everything.
+    //  getObjectGenresIdsWithAjax();
+
+    database.ref().on('value', function emotionSignature(snapshot){
+      var localMovies = snapshot.val().Movies;
+
+      for(var property in localMovies) {
+        console.log(localMovies[property].Description)
       }
 
-// gets the genres in JSON and parse out the Genre ids
-function getObjectGenresIdsWithAjax(){
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
-    "method": "GET",
-    "headers": {},
-    "data": "{}"
-  }
-  $.ajax(settings).done(function (response) {
-    var genreObjectArray = response.genres;
-    var theArrayGenreIds = [];
-    for(var i = 0; i < genreObjectArray.length; i++ ){
-      theArrayGenreIds.push(genreObjectArray[i]["id"]); // I should now have the genre Ids alone in an array.
-    }
-    getMoviesfromArrayIDs(theArrayGenreIds)
-  })
-}
-  getObjectGenresIdsWithAjax();
-  })
-  </script>
-
-</body>
+      // console.log("Value: " + JSON.stringify(snapshot));
+    });
+    //emotionSignature();
+    })
+      </script>
+  </body>
 </html>
