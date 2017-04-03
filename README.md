@@ -1,5 +1,13 @@
 # MoveMe
-Get entertainment (first, movie) suggestions based on your emotional state.  Project 1 of the 2017 GW Coding Bootcamp.
+MovMe is an application that provides with a personalized services tailored to your specific mood for the day. Have you ever wanted to have a movie night in but didn't know what to watch but wanted something to perhaps enlighten you for the evening. 
+
+Now you have that chance. 
+
+We provide you with a service that asks how your day was each time you open up the application (because having a great day every day is important) and we take the indecisiveness out of choosing a movie based on how your feeling. 
+
+Amazing, right? Why not open this up to include more entertainment? Well ladies and gentleman, that is in the near future. For now, sit back and enjoy our selection chosen just for our very special movie date, YOU! 
+
+Are you ready to be moved?
 
 # Screenshots
 
