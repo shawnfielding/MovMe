@@ -1,5 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<!--
+This is a single page script to basically pull a first round of movies, but hopefully will be built to build a csv and individual objects on textpages that can be consumed when we have firebase in play
+
+Notes:
+they only allow requests of 40 every 10 seconds.
+
+  -->
+
+  <title>Moviegetter</title>
+
+<!----------------------------------------------- jQuery  -------------------------------------------------->
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+</script>
+
+<!-----------------------------------------------Bootstrap javascript ---------------------------------->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<!-- --------------------------------------------- Stylesheets ----------------------------------------->
+    <!-- Bootstrap css -->
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Local css -->
+<link href="assets/css/reset.css" rel="stylesheet" type="text/css">
+<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<div id="theResults"></div>
+
+
+<!------------------------------------- Local JavaScript Link and Code ------------------------------------------>
+  <script>
+  $(document).ready(function() {
+  //loops through the genres and gets 40 movies, waits 15 seconds and gets the next one.  It prints them out in csv format on this page in a div above.
+
+
+function getMoviesFromID (theGenreID){
+  console.log(theGenreID)
+  console.log(typeof theGenreID)
+
+
+}
+
+
+  function getMoviesfromArrayIDs (genreids){
+  var theId;
+ 
+      setTimeout( function(){
+      // console.log("hi");
+      for(var i = 0; i < genreids.length; i++){
+      theId  = genreids[i];
+
+      console.log("hello");
+      }      
+      }, 3000);
+
+    }
+  })
+
+    //   async: true,
+    //   crossDomain: true,
+    //   url: "https://api.themoviedb.org/3/genre/"+k+"/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
+    //   method: "GET",
+    //   headers: {},
+    //   data: "{}"
+    //   }).done(function (response) {
+    //     $.each(response.data.movies,function(){
+    //       $("#theResponse").append("<p>"+")
+    //     }
+  // }},2000)
+
+  function GetObjectMoviesUsingGenres(){
+    var theGenre = thegenres.genres;
+      for(var i = 0; i < theGenre.length; i++ ){
+        theGenreGet(theGenre);
+        console.log("theGenre.length +")
+        console.log("I +++++++++++++++++++++++++++++");
+>>>>>>> eaf241882c05d0e78caf7b6a7c9e34d181d091af
 
   <head>
     <meta charset="utf-8">
@@ -45,6 +134,7 @@
           movieImage: "",
         }
 
+<<<<<<< HEAD
 // --------- Handy variables ------
         var theMovies = [];
 
@@ -86,6 +176,30 @@
             }, i * 3000);
           })
         }
+=======
+// gets the genres in JSON and parse out the Genre ids
+function getObjectGenresIdsWithAjax(){
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
+    "method": "GET",
+    "headers": {},
+    "data": "{}"
+  }
+  $.ajax(settings).done(function (response) {
+    var genreObjectArray = response.genres;
+    var theArrayGenreIds = [];
+    for(var i = 0; i < genreObjectArray.length; i++ ){
+      theArrayGenreIds.push(genreObjectArray[i]["id"]); // I should now have the genre Ids alone in an array.
+    }
+    getMoviesfromArrayIDs(theArrayGenreIds);
+  })
+}
+  getObjectGenresIdsWithAjax();
+
+  </script>
+>>>>>>> eaf241882c05d0e78caf7b6a7c9e34d181d091af
 
 // --------- This function queries the movie site and gets all possible genres and their id's
 // --------- It loops through them and puts them into our database.
