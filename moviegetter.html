@@ -45,47 +45,6 @@
           movieImage: "",
         }
 
-// --------- Handy variables ------
-        var theMovies = [];
-
-// ----------- Functions ------
-
-// -------- This function takes an array of ids and gets the movies associated
-// -------- It then pushes them into the database.
-// ------- Currently it only gets the first page of each genre, but it can easily be expanded.
-        function getMoviesfromArrayIDs(genreids) {
-          var pageArray = [];
-          // turn genreids values into an array]
-          $.each(genreids, function(i) {
-            setTimeout(function() {
-              console.log(typeof genreids[i])
-              console.log(genreids[i])
-              var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.themoviedb.org/3/genre/ " + genreids[i] + "+/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=9e47aea3d7ab855ced2fcc031863b928",
-                "method": "GET",
-                "headers": {},
-                "data": "{}"
-              }
-              $.ajax(settings).done(function(response) {
-                var theResults = response.results
-                $.each(theResults, function(k) {
-                  theMovie.movieId = theResults[k].id;
-                  theMovie.movieName = theResults[k].original_title;
-                  theMovie.movieDescription = theResults[k].overview;
-                  theMovie.movieGenres = theResults[k].genre_ids;
-                  theMovie.movieImage = "https://image.tmdb.org/t/p/w640"+theResults[k].poster_path;
-                    database.ref('movies').push({theMovie});
-                  //
-                })
-                theMovies.push(JSON.stringify(response));
-                console.log(JSON.stringify(response))
-                console.log(theMovies)
-              })
-            }, i * 3000);
-          })
-        }
 
 // --------- This function queries the movie site and gets all possible genres and their id's
 // --------- It loops through them and puts them into our database.
