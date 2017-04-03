@@ -11,7 +11,7 @@
 pretty much to anything either can handle.  Remove this comment when necessary.
   -->
 
-  <title>MoveMe</title>
+  <title>MovMe</title>
 
 <!--jQuery-->
 
@@ -24,8 +24,6 @@ pretty much to anything either can handle.  Remove this comment when necessary.
 <!--Stylesheets -->
     <!-- Bootstrap css -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-   <!--Google Fonts -->
-   <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
 
 <!-- Local css -->
 	<link href="assets/css/reset.css" rel="stylesheet" type="text/css">
@@ -34,122 +32,78 @@ pretty much to anything either can handle.  Remove this comment when necessary.
 </head>
 
 <body>
-<!--Basic Bootcamp template with random bells and whisltes-->
+		<div class="container">
+   
+    	<div id="navigation">
+        	 <!--Navigation-->
+                <ul>
+                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#">All Movies</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+        </div>
+                        <div id="main">
+                 			
+                            <div id="header"> 
+                    <!--Main Content area-->            
+                            </div>
+                            <div id="content">
+	                           	  <img id="img-left" class="img-one" src="assets/images/OCD8UW0.jpg" alt="Smiling Woman"><p>Had a rough day? Had an awesome day? Don't feel like going out on a Friday night? Would you rather stay in and watch movie but you're unsure of what you want to watch? Let us help you decide? <br><br>Just give us a brief description on how you're feeling below, and we'll make some recommendations for you based on those emotions. Sounds pretty simple right? It is!</p> <br><br><br><br><br>
+	                              <hr class="red">
+	                              <img id="img-right" class="img-two" src="assets/images/OE5MFK0.jpg" alt="Question Mark">
+	                              <h3>How was your day today?
+	                              </h3>
+	                        <!--User input information-->
+	                 			 <div class="row">
+	                 			 	<div class="col-md-4">
+										  <form>
+							 				<input id="input-style" type="text" class="form-control spacing" placeholder="Please enter brief description">
+							 			  </form>
+							 			  <p>
+											<button id="button-bg" class="btn btn-primary btn-large" href="#">MovMe</button>
+										  </p>
+							 		</div>
+							 		<div class="col-md-4">
+										  <form>
+										  	<input type="radio" name="movie-selection" value="correct-movie">&nbsp;&nbsp;Keep my mood selection<br>
+										  	<input type="radio" name="movie-selection" value="incorrect-movie">&nbsp;&nbsp;Change my mood selection<br>
+										  </form>
+										  <p>
+											<button id="button-bg" class="btn btn-primary btn-large spacing" href="#">MovMe Again</button>
+										  </p>
+									</div>
+								</div>	
+							<!--Section where movie results will be listed-->		
+								 <hr class="red">
+								 <h3>
+								 	Grab a snack and enjoy one of these amazing selections chosen just for YOU!
+								 </h3>
+								 <div id="movie-selection">
+								 </div>
+                            
+                            </div>
+                            <div id="footer">
+                            </div>
+                            
+                        </div>
+        
+    </div>
 
-
-	<div class="container">
-		<nav class="navbar navbar-default">
-
-  		  <div class="navbar-header">
-
-  		    <a class="navbar-brand" id ="font-one" href="#">MovMe</a>
-
- 		 </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-  			 <img class="icon" src="assets/images/facebook.png" alt="facebook"><img class="icon" src="assets/images/twitter_circle.png" alt="twitter"><img class="icon" src="assets/images/google_circle.png"><img class="icon" src="assets/images/instagram.png" alt="Instagram">
-		</nav>
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="header-two" class="jumbotron">
-				<img id="banner" src="assets/images/5234.jpg" alt="MovMe Banner">
-				<h2>Welcome Home</h2>
-				<p>How was your day today?</p>
-				<div class="row">
-					<div class="col-sm-6">
-					<div class="input-group">
-						<form>
- 						 <input id="input-style" type="text" class="form-control" placeholder="Please enter brief description">
- 						 </form>
-					</div>
-						<p>
-							<button class="btn btn-primary btn-large" href="#">Submit</button>
-						</p>
-					</div>
-			<!--Radio Button Selection-->
-			<div class="row">
-			<div class="col-sm-3">
-			    <div class="input-group">
-			      <span class="input-group-addon">
-			      <form>
-              <input type="radio" name="emotion" value="happy">&nbsp;&nbsp;&nbsp;Happy
-			      </span>
-			    </div><!-- /input-group -->
-			  </div><!-- /.col-lg-6 -->
-			  <div class="col-sm-3">
-			    <div class="input-group">
-			      <span class="input-group-addon">
-			        <input type="radio" name="emotion" value="sad">&nbsp;&nbsp;&nbsp;Sad
-			      </span>
-			    </div><!-- /input-group -->
-			    <br>
-			<!--Second Row of Radio Button Selection-->
-			  </div><!-- /.col-lg-6 -->
-			  <div class="col-sm-3">
-			    <div class="input-group">
-			      <span class="input-group-addon">
-			        <input type="radio" name="emotion" value="angry">&nbsp;&nbsp;&nbsp;Angry
-			      </span>
-			    </div><!-- /input-group -->
-			  </div><!-- /.col-lg-6 -->
-			  <!-- /.col-lg-6 -->
-			  <div class="col-sm-3">
-			    <div class="input-group">
-			      <span class="input-group-addon">
-			        <input type="radio" name="emotion" value="tired">&nbsp;&nbsp;&nbsp;Tired
-			       </span>
-			        </form>
-			    </div><!-- /input-group -->
-			  </div><!-- /.col-lg-6 -->
-				</div>
-				</div>
-				</div>
-				</div>
-				</div>
-				
-								
-		<!--JumboTron Header-->
-			<!-- <div id="header" class="jumbotron">
-				<h2>Welcome Home</h2>
-				<p>How was your day today?</p>
-				<div classs="row">
-					<div class="col-md-6">
-					<div class="input-group">
- 						 <input id="input-style" type="text" class="form-control" placeholder="Please enter brief description">
-					</div>
-						<p>
-							<a class="btn btn-primary btn-large" href="#">Submit</a>
-						</p>
-					</div>
-
-				</div>
-			</div> -->
-		<!--Container that will hold the movie results-->
-			<div id="header-two" class="jumbotron">
-				<p>We recommend grabbing your favorite snack and watching one of these great movies.</p>
-			
-	<!--This div will hold the movie results-->
-				<div class="row">
-					<div class="col-md-12" id="movie-list">
-					</div>
-				</div>
-			</div>
-	
 <!--- Local JavaScript Link and Code -->
 
         <script src="assets/javascript/app.js"></script>
-        <script>
-
-
-        // any local javascript that might be needed.
+		<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+        <script type="text/javascript" src="indico.js"></script>
 
 
         </script>
 
-
-		<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-         <script type="text/javascript" src='indico.js'></script>
-
 </body>
 </html>
+
+
+
+
+
+
