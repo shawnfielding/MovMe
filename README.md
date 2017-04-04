@@ -23,6 +23,39 @@ To efficiently and accurately test cross browser functionality, it is recommende
 * The Movie Database API
 * Bootstrap
 # Walk through
+$("button").on("click", function() {
+  event.preventDefault();
+  var emotionScore;
+  queryURL = 'https://apiv2.indico.io/emotion';
+  var mood = $("#input-style").val().trim();
+  console.log(mood);
+  $.post(
+    'https://apiv2.indico.io/emotion',
+    JSON.stringify({
+      'api_key': "fc7ac440dd84c6520af1f0e889df8863",
+      'data': mood,
+    })
+  ).then(function(res) {
+    console.log(res)
+  });
+}); 
+  for(var property in localMovies) {
+  console.log(localMovies[property].Description);
+   $.post(
+    queryURL,
+    {
+      'api_key': "fc7ac440dd84c6520af1f0e889df8863",
+      'data': localMovies[property].Description,
+    }).then(function(res) {
+    console.log(res);
+    return res;
+    database.ref(localMovies[property]).push({
+      'emotion': res,
+    }
+    );
+    });
+  }
+});
 # Authors
 * [Alex Vohs](https://github.com/avohs24) - 
 * [Shawn Fielding](https://github.com/shawnfielding) -  
