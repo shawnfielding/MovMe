@@ -24,7 +24,8 @@ To efficiently and accurately test cross browser functionality, it is recommende
 * Bootstrap
 # Walk through
 
-`$("button").on("click", function() {
+```
+$("button").on("click", function() {
   event.preventDefault();
   var emotionScore;
   queryURL = 'https://apiv2.indico.io/emotion';
@@ -56,7 +57,8 @@ To efficiently and accurately test cross browser functionality, it is recommende
     );
     });
   }
-});`
+});
+```
 # Authors
 * [Alex Vohs](https://github.com/avohs24) - 
 * [Shawn Fielding](https://github.com/shawnfielding) -  
