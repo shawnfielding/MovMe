@@ -11,7 +11,7 @@
 pretty much to anything either can handle.  Remove this comment when necessary.
   -->
 
-  <title>MovMe</title>
+  <title>Contact</title>
 
 <!--jQuery-->
 
@@ -38,19 +38,37 @@ pretty much to anything either can handle.  Remove this comment when necessary.
         	 <!--Navigation-->
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a class="active" href="about.html">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a class="active" href="contact.html">Contact</a></li>
                 </ul>
-        </div>
+      </div>
                         <div id="main">
                  			
                             <div id="header"> 
                     <!--Main Content area-->            
                             </div>
                             <div id="content">
-                            	  <h2>About</h2><br>
-	                           	  <img id="img-left" class="img-three" src="assets/images/cinema-64154_640.jpg" alt="MovMe Logo"><p>MovMe is an application that provides with a personalized services tailored to your specific mood for the day. Have you ever wanted to have a movie night in but didn't know what to watch but wanted something to perhaps enlighten you for the evening. <br><br> Now you have that chance. <br><br> We provide you with a service that asks how your day was each time you open up the application (because having a great day every day is important) and we take the indecisiveness out of choosing a movie based on how your feeling. <br><br> Amazing, right? Why not open this up to include more entertainment? Well ladies and gentleman, that is in the near future. For now, sit back and enjoy our selection chosen just for our very special movie date, YOU! <br><br> Are you ready to be moved? </p> <br>
-	                              
+                            	  <h2>Contact</h2><br>
+	                           	            <form role="form">
+                                              <div class="form-group">
+                                                <label for="name-input">Name:</label>
+                                                <input class="form-control" id="name-input" type="text">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="email-input">Email:</label>
+                                                <input class="form-control" id="email-input" type="email">
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="comment-input">Comments:</label>
+                                                <textarea class="form-control" id="comment-input" rows="5"></textarea>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="referral-input">How did you hear about us?</label>
+                                                <textarea class="form-control" id="referral-input" rows="2"></textarea>
+                                              </div>
+                                              <button onclick="location.href='mailto:barber.t12@gmail.com';" class="btn btn-primary" id="send-feedback" type="submit">Submit</button>
+                                               <input class="btn btn-primary" type="reset" value="Reset">
+                                            </form>
 	                       
                             <div id="footer">
                             </div>
