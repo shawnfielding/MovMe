@@ -5,8 +5,7 @@ We provide you with a service that asks how your day was each time you open up t
 Amazing, right? Why not open this up to include more entertainment? Well ladies and gentleman, that is in the near future. For now, sit back and enjoy our selection chosen just for our very special movie date, YOU! 
 Are you ready to be moved?
 # Screenshots
-![MovMe Screenshot]
-(https://github.com/shawnfielding/MovMe/blob/master/assets/images/Screen%20Shot%202017-04-03%20at%2010.34.21%20PM.png)
+<img src="https://github.com/shawnfielding/MovMe/blob/master/assets/images/Screen%20Shot%202017-04-03%20at%2010.34.21%20PM.png" alt="MovMe website">
 # Technologies used
 * HTML5
 * CSS 
