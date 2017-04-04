@@ -6,6 +6,7 @@ Amazing, right? Why not open this up to include more entertainment? Well ladies 
 Are you ready to be moved?
 # Screenshots
 <img src="https://github.com/shawnfielding/MovMe/blob/master/assets/images/Screen%20Shot%202017-04-03%20at%2010.34.21%20PM.png" alt="MovMe website">
+
 # Technologies used
 * HTML5
 * CSS 
