@@ -8,96 +8,75 @@
 <body>
 
 <script type="text/javascript">
-
-var config = {
-  apiKey: "AIzaSyB3cKe_KGVOsgTIkr6lSiszMiczU0PNYSM",
-  authDomain: "movme-92cb7.firebaseapp.com",
-  databaseURL: "https://movme-92cb7.firebaseio.com",
-  storageBucket: "movme-92cb7.appspot.com",
-  messagingSenderId: "314238857658"
-};
-
+  var config = {
+    apiKey: "AIzaSyABTypoh_yIvJiBYBSQEFdLhMUPthnOpI0",
+    authDomain: "test-7af3a.firebaseapp.com",
+    databaseURL: "https://test-7af3a.firebaseio.com",
+    projectId: "test-7af3a",
+    storageBucket: "test-7af3a.appspot.com",
+    messagingSenderId: "697490296051"
+  };
 firebase.initializeApp(config);
 var database = firebase.database();
 var queryURL;
   
 $("button").on("click", function() {
   event.preventDefault();
-
   var emotionScore;
   queryURL = 'https://apiv2.indico.io/emotion';
-
   var mood = $("#input-style").val().trim();
   console.log(mood);
-
   $.post(
     'https://apiv2.indico.io/emotion',
     JSON.stringify({
-      'api_key': "fc7ac440dd84c6520af1f0e889df8863",
+      'api_key': "45c12a9fc7621a0449f71ea8b1c18b7a",
       'data': mood,
-
     })
   ).then(function(res) {
     console.log(res)
   });
-
 }); 
-
 database.ref().on('value', function emotionSignature(snapshot){
   var localMovies = snapshot.val().Movies;
-queryURL = 'https://apiv2.indico.io/emotion';
+  var queryURL = 'https://apiv2.indico.io/emotion';
   var corsRequest = new XMLHttpRequest();
   var requestURL = 'https://www.themoviedb.org';
-   
-  function domainRequest() {
-    if(corsRequest) {    
-      corsRequest.open('GET', requestURL, true);
-      corsRequest.onreadystatechange = handler;
-      corsRequest.send(); 
-    }
-  }
-
+  
   // var corsURL = "https://movme-92cb7.firebaseio.com/cors";
   // var corsRequest = createCORSRequest('GET', corsURL);
   // corsRequest.send();
+  // var emotion = { 'results': 
+  //   { 
+  //     'anger': 0.5 ,
+  //     'joy': 0.1,
+  //     'sadness': 0.4
+  //   }
+  // }
+  
   for(var property in localMovies) {
-  console.log(localMovies[property].Description);
-
-   $.post(
-    queryURL,
-    {
-      'api_key': "fc7ac440dd84c6520af1f0e889df8863",
-      'data': localMovies[property].Description,
-
-    }).then(function(res) {
-    console.log(res);
-    return res;
-    database.ref(localMovies[property]).push({
-      'emotion': res,
-    }
-    );
-    });
+    (function(key) { // Look up JavaScript closure!!!!
+      $.post(
+        queryURL,
+        {
+          api_key: "45c12a9fc7621a0449f71ea8b1c18b7a",
+          data: localMovies[key].Description,
+        }, function(res) {
+          postEmotion('Movies/' + key, res);
+        })
+        .fail(function(error) { console.error("POST failed!", error); });
+    })(property);
   }
 });
+/* Utility function to post to a database based on
+child key and the data */
+function postEmotion(path, data){
+  database.ref(path).update({
+    'emotion': data
+  })
+  .then(() => console.log('Sync pushed on key: ' + property))
+  .catch((error) => console.error('Sync failed on key: ' + property));
+}
 
-
-// database.ref().on('value', function emotionSignature(snapshot){
-//   var localMovies = snapshot.val().Movies;
-//   // for(var property in localMovies) {
-//   console.log(localMovies[12].Description);
-//    $.post(
-//     queryURL,
-//     JSON.stringify({
-//       'api_key': "61cb69fcfa24357a37c920ee85cc3374",
-//       'data': localMovies[12].Description,
-
-//     })
-//     ).then(function(res) {
-//     console.log(res)
-//     });
-//   }
-// );
  
 </script>
 </body>
-</html>
