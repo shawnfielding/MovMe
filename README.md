@@ -1,4 +1,4 @@
-# MoveMe
+# MovMe
 MovMe is an application that provides with a personalized services tailored to your specific mood for the day. Have you ever wanted to have a movie night in but didn't know what to watch but wanted something to perhaps enlighten you for the evening. 
 Now you have that chance. 
 We provide you with a service that asks how your day was each time you open up the application (because having a great day every day is important) and we take the indecisiveness out of choosing a movie based on how your feeling. 
