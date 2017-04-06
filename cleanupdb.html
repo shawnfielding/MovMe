@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <title></title>
+  </head>
+  <body>
+    <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyABTypoh_yIvJiBYBSQEFdLhMUPthnOpI0",
+    authDomain: "test-7af3a.firebaseapp.com",
+    databaseURL: "https://test-7af3a.firebaseio.com",
+    projectId: "test-7af3a",
+    storageBucket: "test-7af3a.appspot.com",
+    messagingSenderId: "697490296051"
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
+
+    function postEmotion(path, data){
+      database.ref(path).update({
+        'Emosig': data
+      })
+    }
+
+function CleanUpEmos(){
+  var emoSigSt; //
+    database.ref().once('value', function emotionSignature(snapshot){
+      var localMovies = snapshot.val().Movies;
+      console.log(localMovies)
+      $.each(localMovies, function(x){
+      console.log(localMovies[x])
+      emoSigSt =localMovies[x]["emotion"];
+      if(typeof emoSigSt === "string"){
+        emoSigSt = JSON.parse(emoSigSt);
+        $.each(emoSigSt.results, function(i){
+          emoSigSt.results[i] = parseInt(emoSigSt.results[i]*100);
+          var theMovie =JSON.stringify(localMovies[x]);
+          var emoSig = emoSigSt.results;
+       //postEmotion("Movies/"+ localMovies[x]["ID"],emoSig)
+        })
+      console.log(emoSigSt.results);
+    }
+      })
+    })
+    }
+
+
+CleanUpEmos()
+    </script>
+  </body>
+</html>/
